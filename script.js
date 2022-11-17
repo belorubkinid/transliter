@@ -1,5 +1,4 @@
 let enteredText = '';
-let cuttedText = '';
 let fullTranslitText = '';
 
 const textToRuSide = (text) => {
@@ -18,15 +17,6 @@ const textToTranslitSide = (translitText) => {
   lastSpan.after(newSpan);
 };
 
-const textCut = (text) => {
-  cuttedText = text.slice(0, 30);
-  cuttedText = cuttedText.split(' ');
-  cuttedText = cuttedText.slice(0, cuttedText.length - 1);
-  cuttedText = cuttedText.join(' ');
-  cuttedText = `${cuttedText}...`;
-  return cuttedText;
-};
-
 const deletePopUpWindows = () => {
   const lastSpanRu = document.querySelector('.ruSide').lastElementChild;
   const lastSpanTranslit = document.querySelector('.translitSide').lastElementChild;
@@ -39,11 +29,15 @@ const showMessage = (message) => {
   alert(message);
 };
 
-const checkLatinLetter = () => {
-  const latinLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+const clearInput = () => {
+  document.querySelector('input').value = '';
+}
+
+const inputValidation = () => {
+  const latinLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890=-()*?&@!#№$;^~';
   for (let i = 0; i < latinLetters.length; i += 1) {
     if (latinLetters.includes(enteredText[i])) {
-      showMessage('Текст не должен содержать латинских букв.');
+      showMessage('Текст не должен содержать латинских букв, цифр или символов.');
       return false;
     }
   }
@@ -75,25 +69,32 @@ function addToDictionary() {
     return false;
   }
 
-  if (checkLatinLetter()) {
+  if (inputValidation()) {
     translit(enteredText);
   } else {
+    clearInput();
     return false;
   }
 
   if (enteredText.length > 50) {
-    textCut(enteredText);
-    textToRuSide(cuttedText);
-    textCut(fullTranslitText);
-    textToTranslitSide(cuttedText);
+    textToRuSide(enteredText);
+    textToTranslitSide(fullTranslitText);
+    clearInput();
     return true;
   }
 
   textToRuSide(enteredText);
   textToTranslitSide(fullTranslitText);
   deletePopUpWindows();
+  clearInput();
   return true;
 }
 
 const addWordButton = document.querySelector('button');
 addWordButton.addEventListener('click', addToDictionary);
+const input = document.querySelector('input');
+input.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    addToDictionary();
+  }
+});

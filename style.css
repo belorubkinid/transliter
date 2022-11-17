@@ -65,6 +65,7 @@ span {
   margin: 2px;
   min-width: 100%;
   text-align: center;
+  text-overflow: ellipsis;
 }
 
 [data-tooltip] {
