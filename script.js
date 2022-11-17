@@ -1,4 +1,5 @@
 let enteredText = '';
+let cuttedText = '';
 let fullTranslitText = '';
 
 const textToRuSide = (text) => {
@@ -15,6 +16,15 @@ const textToTranslitSide = (translitText) => {
   newSpan.setAttribute('data-tooltip', `${fullTranslitText}`);
   const lastSpan = document.querySelector('.translitSide').lastElementChild;
   lastSpan.after(newSpan);
+};
+
+const textCut = (text) => {
+  cuttedText = text.slice(0, 30);
+  cuttedText = cuttedText.split(' ');
+  cuttedText = cuttedText.slice(0, cuttedText.length - 1);
+  cuttedText = cuttedText.join(' ');
+  cuttedText = `${cuttedText}...`;
+  return cuttedText;
 };
 
 const deletePopUpWindows = () => {
@@ -77,8 +87,10 @@ function addToDictionary() {
   }
 
   if (enteredText.length > 50) {
-    textToRuSide(enteredText);
-    textToTranslitSide(fullTranslitText);
+    textCut(enteredText)
+    textToRuSide(cuttedText);
+    textCut(fullTranslitText)
+    textToTranslitSide(cuttedText);
     clearInput();
     return true;
   }
