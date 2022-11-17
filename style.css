@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #151818;
+  min-height: 100%;
+}
+
+header {
+  font-family: 'Ultra', serif;
+  font-size: xx-large;
+  text-shadow: 10px 10px 30px #2400ff, -10px -10px 30px #7e2bd9;
+  margin: 20px;
+  -webkit-text-stroke: 2px #7e2bd9;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+}
+
+.form {
+  background-color: #7e2bd980;
+  padding: 20px;
+  border-radius: 10px 10px 10px 10px;
+  margin-bottom: 20px;
+}
+
+.dictionary {
+  color: aliceblue;
+  background: #2400ffa1;
+  border: 2px solid #2400ff;
+  border-radius: 10px 10px 10px 10px;
+  min-width: 1000px;
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 49%;
+  font-size: 20px;
+  padding: 5px;
+}
+
+input {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+}
+
+button {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+}
+
+hr {
+  border: 1px solid #2400ff;
+  border-radius: 10px 10px 10px 10px;
+  margin: 0px;
+}
+
+span {
+  margin: 2px;
+  min-width: 100%;
+  text-align: center;
+}
+
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #7e2bd9;
+  color: #fff;
+  pointer-events: none;
+  opacity: 0;
+  transition: 1s;
+  z-index: 1
+}
+
+ [data-tooltip]:hover::after {
+  opacity: 1;
+ }
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .dictionary {
+    min-width: 80%;
+  }
+}
+
+@media (min-width: 460px) and (max-width: 767px) {
+  .dictionary {
+    display: flex;
+    flex-direction: column;
+    min-width: 80%;
+  }
+
+  .list {
+    justify-content: flex-start;
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 459px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 91%;
+  }
+
+  button {
+    min-width: 231px;
+    margin-top: 10px;
+  }
+
+  .dictionary {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+  }
+
+  .list {
+    justify-content: flex-start;
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 271px) {
+  .dictionary {
+    min-width: 270px;
+  }
+}
+
